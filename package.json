@@ -1,0 +1,9 @@
+{
+  "name": "visor-3d-unificado",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  }
+}

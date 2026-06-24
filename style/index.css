@@ -1,0 +1,296 @@
+:root {
+  color-scheme: dark;
+  --background: #081321;
+  --panel: #0d1d31;
+  --panel-2: #102640;
+  --canvas: #07182a;
+  --border: #315579;
+  --border-soft: #203c59;
+  --text: #eef7ff;
+  --muted: #9db5cc;
+  --accent: #55b9ee;
+  --accent-dark: #0d6d9e;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { min-width: 320px; background: var(--background); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--background);
+}
+
+button, input { font: inherit; }
+button { color: inherit; }
+
+button:focus-visible,
+input:focus-visible,
+canvas:focus-visible,
+.file-button:focus-visible {
+  outline: 2px solid #8bd6ff;
+  outline-offset: 2px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 0.8rem clamp(0.75rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--border-soft);
+  background: #091827;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 1rem;
+  width: min(1450px, calc(100% - 1.5rem));
+  margin: 1rem auto;
+}
+
+.viewer-panel,
+.control-panel {
+  border: 1px solid var(--border-soft);
+  border-radius: 0;
+  background: var(--panel);
+}
+
+.viewer-panel {
+  min-width: 0;
+  padding: 1rem;
+}
+
+.control-panel {
+  align-self: start;
+  padding: 0.85rem;
+}
+
+.status-row {
+  min-height: 24px;
+  margin-bottom: 0.7rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.canvas-wrap {
+  display: grid;
+  min-height: 430px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--canvas);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  cursor: grab;
+  touch-action: none;
+}
+
+canvas.dragging { cursor: grabbing; }
+
+.viewer-toolbar {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.button,
+.file-button,
+.mode-button,
+.direction-pad button,
+.zoom-controls button,
+.camera-reset {
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.button,
+.file-button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.button-primary,
+.file-button {
+  border-color: var(--accent);
+  color: #03141f;
+  background: var(--accent);
+}
+
+.button-primary:hover,
+.file-button:hover { background: #79caf4; }
+
+.button-secondary { background: var(--panel-2); }
+.button-secondary:hover { border-color: var(--accent); }
+
+.control-section { padding: 0.65rem; }
+.control-section + .control-section {
+  margin-top: 0.65rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+h2 {
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.section-heading h2 { margin-bottom: 0.7rem; }
+.section-heading output {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.mode-grid { display: grid; gap: 0.45rem; }
+
+.mode-button {
+  width: 100%;
+  min-height: 40px;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-soft);
+  text-align: left;
+  background: var(--panel-2);
+  font-size: 0.82rem;
+}
+
+.mode-button:hover { border-color: var(--accent); }
+.mode-button.active {
+  border-color: var(--accent);
+  color: #dff5ff;
+  background: var(--accent-dark);
+}
+
+.camera-controls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  grid-template-areas: ". up ." "left . right" ". down .";
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.direction-pad button,
+.zoom-controls button {
+  display: grid;
+  width: 44px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid var(--border-soft);
+  background: var(--panel-2);
+}
+
+.direction-pad button:hover,
+.zoom-controls button:hover { border-color: var(--accent); }
+
+.direction-pad [data-action="up"] { grid-area: up; }
+.direction-pad [data-action="left"] { grid-area: left; }
+.direction-pad [data-action="right"] { grid-area: right; }
+.direction-pad [data-action="down"] { grid-area: down; }
+
+.zoom-controls {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+}
+
+.zoom-controls span {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.camera-reset {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 0.65rem;
+  border: 1px solid var(--border-soft);
+  background: var(--panel-2);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.camera-reset:hover { border-color: var(--accent); }
+
+.range {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .control-panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .control-section + .control-section {
+    margin-top: 0;
+    padding-top: 0.65rem;
+    border-top: 0;
+    border-left: 1px solid var(--border-soft);
+  }
+}
+
+@media (max-width: 650px) {
+  .topbar { justify-content: stretch; }
+  .topbar > * { flex: 1; }
+  .app-shell { width: calc(100% - 0.75rem); margin: 0.4rem auto; }
+  .viewer-panel { padding: 0.55rem; }
+  .canvas-wrap { min-height: 330px; }
+  .control-panel { grid-template-columns: 1fr; }
+  .control-section + .control-section {
+    border-left: 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .viewer-toolbar > * { flex: 1 1 100%; }
+}

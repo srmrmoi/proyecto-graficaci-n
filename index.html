@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081321">
+  <title>Visor 3D</title>
+  <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+  <header class="topbar">
+    <label class="file-button" for="file-input">Abrir modelo</label>
+    <input id="file-input" class="visually-hidden" type="file" accept=".txt,.dat,.obj,text/plain">
+    <button id="load-window" class="button button-secondary" type="button">Cargar ventana</button>
+  </header>
+
+  <main class="app-shell">
+    <section class="viewer-panel" aria-label="Visor tridimensional">
+      <div class="status-row" aria-live="polite">
+        <span id="model-status">Ventana 3D</span>
+      </div>
+
+      <div id="canvas-wrap" class="canvas-wrap">
+        <canvas id="circlechart" width="900" height="580" tabindex="0"
+          aria-label="Visor tridimensional interactivo"></canvas>
+      </div>
+
+      <div class="viewer-toolbar" aria-label="Controles de animación">
+        <button id="toggle-animation" class="button button-primary" type="button" aria-pressed="false">
+          <span id="animation-icon" aria-hidden="true">Ⅱ</span>
+          <span id="animation-label">Pausar</span>
+        </button>
+        <button id="reset-animation" class="button button-secondary" type="button">Cerrar ventana</button>
+      </div>
+    </section>
+
+    <aside class="control-panel" aria-label="Controles">
+      <section class="control-section">
+        <h2>Renderizado</h2>
+        <div class="mode-grid" role="group" aria-label="Modo de renderizado">
+          <button class="mode-button" data-mode="wireframe" type="button">Alámbrico</button>
+          <button class="mode-button" data-mode="hlines" type="button">Líneas ocultas</button>
+          <button class="mode-button active" data-mode="zbuffer" type="button" aria-pressed="true">Z-buffer</button>
+        </div>
+      </section>
+
+      <section class="control-section">
+        <h2>Cámara</h2>
+        <div class="camera-controls">
+          <div class="direction-pad" role="group" aria-label="Rotación de cámara">
+            <button type="button" data-action="up" aria-label="Mover vista hacia arriba">↑</button>
+            <button type="button" data-action="left" aria-label="Mover vista hacia la izquierda">←</button>
+            <button type="button" data-action="right" aria-label="Mover vista hacia la derecha">→</button>
+            <button type="button" data-action="down" aria-label="Mover vista hacia abajo">↓</button>
+          </div>
+          <div class="zoom-controls" role="group" aria-label="Zoom de cámara">
+            <button type="button" data-action="zoom-in" aria-label="Acercar">＋</button>
+            <span>Zoom</span>
+            <button type="button" data-action="zoom-out" aria-label="Alejar">−</button>
+          </div>
+        </div>
+        <button id="reset-view" class="camera-reset" type="button">Restablecer</button>
+      </section>
+
+      <section class="control-section">
+        <div class="section-heading">
+          <h2>Animación</h2>
+          <output id="speed-output" for="speed-range">24</output>
+        </div>
+        <input id="speed-range" class="range" type="range" min="8" max="55" value="24" step="1" aria-label="Velocidad de animación">
+      </section>
+    </aside>
+  </main>
+
+  <script src="./dist/src/index.js" type="module"></script>
+</body>
+</html>
